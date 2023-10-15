@@ -277,44 +277,98 @@
 //    return 0;
 //}
 
+//#include <stdio.h>
+//int main()
+//{
+//	int n = 0;
+//	scanf("%d", &n);
+//	int a[100] = { 0 };
+//	int b[100] = { 0 };
+//	for (int i = 0; i < n; i++)
+//	{
+//		scanf("%d %d", &a[i], &b[i]);
+//	}
+//	int t = 0;
+//	scanf("%d", &t);
+//	int sum = 0;
+//	for (int i = 0; i < n; i++)
+//	{
+//		sum += (100 / a[i]) * b[i];
+//	}
+//	if (sum >= t)
+//		printf("Already Au\n");
+//	else
+//	{
+//		int sub = t - sum;
+//		for (int i = 0; i < n; i++)
+//		{
+//			if ((a[i] - b[i]) * (100 / a[i]) < sub)
+//				printf("NAN\n");
+//			else
+//			{
+//				int ret = sub / (100 / a[i]);
+//				if(sub%(100/a[i])==0)
+//				printf("%d\n", ret);
+//				else
+//				{
+//					printf("%d\n", ret + 1);
+//				}
+//			}
+//		}
+//	}
+//	return 0;
+//}
+
+
 #include <stdio.h>
+
 int main()
 {
 	int n = 0;
 	scanf("%d", &n);
-	int a[100] = { 0 };
-	int b[100] = { 0 };
-	for (int i = 0; i < n; i++)
+	int arr[200000] = { 0 };
+	
+	for (int i = 1; i <= n; i++)
 	{
-		scanf("%d %d", &a[i], &b[i]);
+		scanf("%d", &arr[i]);
 	}
-	int t = 0;
-	scanf("%d", &t);
-	int sum = 0;
-	for (int i = 0; i < n; i++)
+	for (int i = 1; i <= n; i++)
 	{
-		sum += (100 / a[i]) * b[i];
-	}
-	if (sum >= t)
-		printf("Already Au\n");
-	else
-	{
-		int sub = t - sum;
-		for (int i = 0; i < n; i++)
+		if ((n - i + 1) % 2)
 		{
-			if ((a[i] - b[i]) * (100 / a[i]) < sub)
-				printf("NAN\n");
+			if (arr[i])
+				arr[i] = 0;
 			else
-			{
-				int ret = sub / (100 / a[i]);
-				if(sub%(100/a[i])==0)
-				printf("%d\n", ret);
-				else
-				{
-					printf("%d\n", ret + 1);
-				}
-			}
+				arr[i] = 1;
 		}
 	}
+	int j = 0;
+	int m = n;
+	int k = 1;
+	int p = 2;
+	for (int i = 1; i <= m; i++)
+	{
+		if (n >= 1)
+		{
+			arr[j++] = arr[n];
+			n -= 2;
+		}
+		else if(m%2==0)
+		{
+			arr[j++] = arr[k];
+			k += 2;
+		}
+		else
+		{
+			arr[j++] = arr[p];
+			p += 2;
+		}
+		
+	}
+	for (int i=0; i<j; i++)
+	{
+		printf("%d ", arr[i]);
+	}
+	printf("\n");
 	return 0;
 }
